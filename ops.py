@@ -2,21 +2,30 @@ import tensorflow as tf
 from utils import orthogonal_regularizer_fully, orthogonal_regularizer
 
 ##################################################################################
-# Initialization
+# Initialization 一些初始化方法
 ##################################################################################
 
-# Xavier : tf_contrib.layers.xavier_initializer()
+# Xavier : tf_contrib.layers.xavier_initializer() 
+# Xavier是一種很有效的神經網絡初始化方法, 針對線性函數層(Dense, tanh) 不適合用在Relu.Sigmoid
+
 # He : tf_contrib.layers.variance_scaling_initializer()
+# 與Xavier相反, 針對非線性函數層(Relu, Sigmoid)
+
 # Normal : tf.random_normal_initializer(mean=0.0, stddev=0.02)
 # Truncated_normal : tf.truncated_normal_initializer(mean=0.0, stddev=0.02)
+# 是否截斷的常態分佈
+
 # Orthogonal : tf.orthogonal_initializer(1.0) / relu = sqrt(2), the others = 1.0
+# 生成正交矩陣的隨機數。當需要生成的參數是2維時，這個正交矩陣是由均勻分佈的隨機數矩陣經過SVD分解而來
+
 
 ##################################################################################
-# Regularization
+# Regularization 一些正規化方法
 ##################################################################################
 
 # l2_decay : tf_contrib.layers.l2_regularizer(0.0001)
 # orthogonal_regularizer : orthogonal_regularizer(0.0001) / orthogonal_regularizer_fully(0.0001)
+# # 正交(垂直)初始化(在utils.py定義)
 
 weight_init = tf.truncated_normal_initializer(mean=0.0, stddev=0.02)
 weight_regularizer = orthogonal_regularizer(0.0001)
